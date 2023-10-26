@@ -30,3 +30,14 @@ table .esquerda {
     text-align: left;
     padding-left: 1rem;
 }
+
+.div_select {
+    text-align: center;
+}
+
+.div_select select {
+    font-size: 1.25rem;
+    padding: 10px;
+    border-radius: 5px;
+}
+
