@@ -2,6 +2,7 @@ import './App.css'
 import Card from './components/Card'
 import GameTable from './components/GameTable'
 import GroupStandings from './components/GroupStandings'
+import KnockoutStage from './components/KnockoutStage'
 
 function App() {
 
@@ -21,6 +22,13 @@ function App() {
       <section className='group_table'>
         <GroupStandings />
       </section>
+
+      <h2>Oitavas de final</h2>
+      <section className='knockout_table'>
+        <KnockoutStage fase="oitavas"/>
+      </section>
+      
+
     </>
   )
 }
