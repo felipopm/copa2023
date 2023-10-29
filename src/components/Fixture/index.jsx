@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import styles from "./KnockoutStage.module.css"
+import styles from "./Fixture.module.css"
 
-function KnockoutStage ({ fase }) {
+function Fixture ({ fase, data }) {
 
     const [ jogos, setJogos ] = useState([])
     const url = `https://raw.githubusercontent.com/edsonmaia/apifakecopa2023/main/${fase}-copa-2023.json`
@@ -16,13 +16,20 @@ function KnockoutStage ({ fase }) {
         buscarJogos()
     }, [url])
 
+    let jogosFiltrados = jogos.filter ( jogo => jogo.data == data )
+
     return(
         <section className={styles.jogo}>
             {
-                jogos.map(jogo => (
-                    <div key={jogo.jogo} className={styles.jogo}>
+                (jogosFiltrados.length > 0) ?
+                jogosFiltrados.map(jogo => (
+                    <div 
+                        key={jogo.jogo} 
+                        className={styles.jogo}>
                         <h2 className={styles.titulo2}>
-                            {jogo.tipo == "decisão" ? jogo.fase : fase} {jogo.jogo} - chave {jogo.chave}</h2> 
+                            {jogo.tipo == "decisão" ? jogo.fase : fase}
+                            {jogo.jogo} - chave {jogo.chave}
+                        </h2>
                         <h3>
                             <span className={styles.dia}>{jogo.dia}</span>
                             <span className={styles.data}>{jogo.data}</span>
@@ -43,21 +50,29 @@ function KnockoutStage ({ fase }) {
                                 {jogo.visitante}
                             </div>
                         </h3>
-                        <div className={styles.tempo_extra}>
+                        <div className={`${styles.tempo_extra} ${styles.centralizar}`}>
                             {
                                 jogo.prorrogacao === "Sim" &&
-                                <div className={styles.centralizar}>
-                                    <span>Prorrogação? {jogo.prorrogacao} | Placar Prorrogação: {jogo.placar_prorrogacao}</span>
-                                    <span>Pênaltis? {jogo.penaltis} | Placar Pênaltis: {jogo.placar_penaltis}</span>
+                                <div>
+                                    Prorrogação? {jogo.prorrogacao} | Placar {jogo.placar_prorrogacao}
                                 </div>
                             }
+                            {
+                                jogo.penaltis === "Sim" &&
+                                <div>
+                                    Pênaltis? {jogo.penaltis} | 
+                                    Placar {jogo.placar_penaltis}
+                                </div>
+                            }
+                            
                         </div>
                         <h4>Vencedor: {jogo.vencedor}</h4>
                     </div>
                 ))
+                : <h4> Sem jogos no dia {data}</h4>
             }
         </section>
     );
 }
 
-export default KnockoutStage 
+export default Fixture 
