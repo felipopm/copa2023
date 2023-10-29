@@ -21,7 +21,7 @@ function KnockoutStage ({ fase }) {
             {
                 jogos.map(jogo => (
                     <div key={jogo.jogo} className={styles.jogo}>
-                        <h2 className={styles.titulo2}>Oitavas {jogo.jogo} - chave {jogo.chave}</h2>
+                        <h2 className={styles.titulo2}>{fase} {jogo.jogo} - chave {jogo.chave}</h2>
                         <h3>
                             <span className={styles.dia}>{jogo.dia}</span>
                             <span className={styles.data}>{jogo.data}</span>
