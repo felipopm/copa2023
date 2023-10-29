@@ -13,7 +13,8 @@ function TournamentBracket ({ fase }) {
     const url = `https://raw.githubusercontent.com/edsonmaia/apifakecopa2023/main/${fase}-copa-2023.json`
 
     useEffect(() => {
-        const buscarJogos = async() => {
+        const buscarJogos = async() => { 
+            setJogos([])
             const response = await fetch(url)
             const data = await response.json()
             setJogos(data)
